@@ -10,12 +10,14 @@ Verwenden Sie dafür die untenstehenden Arrays
 
 const controls = ["<", "</", ">"];
 const tags = ["html","head","head","body","h1","h1","p","p","p","p","ul","li","li","li","li","ul","body","html"];
+let stack = [];
+
 
 // Ziel --> "<html><head></head><body><p></p></body></html>"; 
  
  
 // Modul: HTML-String erzeugen | Test
-ausgabe(getHTML());
+// ausgabe(getHTML());
 function getHTML(){
 	
     let htmlStr = "";
@@ -23,12 +25,41 @@ function getHTML(){
     // </tag> --> close
 
     for (let i = 0; i < tags.length; i++) {
-        htmlStr += getTag(tags[i],"close"); 
+        if (isOpenTag(tags[i])) {
+            htmlStr += getTag(tags[i],"open");
+        } else {
+            htmlStr += getTag(tags[i],"close");
+        }
     }
 
     return htmlStr; 
   
 }
+
+// Modul: open || close ?
+ausgabe(isOpenTag("html"));
+ausgabe(isOpenTag("head"));
+ausgabe(isOpenTag("head"));
+ausgabe(isOpenTag("body"));
+function isOpenTag(tag) {
+
+    // wenn tag noch nicht im stack -> push() / true
+    // wenn tag schon im stack -> pop() / false
+
+    const cond = (stack.indexOf(tag) == - 1); // tag ist neu!
+
+    if (cond) {
+        stack.push(tag);
+        ausgabe(stack);
+        return true;
+    } else {
+        stack.pop();
+        ausgabe(stack);
+        return false;
+    }
+ 
+}
+
 
 // Modul: Zusammenbau: <tagStr> --> Tests:
 // ausgabe(getTag("p","open"));
