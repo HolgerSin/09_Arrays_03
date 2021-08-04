@@ -10,19 +10,21 @@ Verwenden Sie dafür die untenstehenden Arrays
 
 const controls = ["<", "</", ">"];
 const tags = ["html","head","head","body","h1","h1","p","p","p","p","ul","li","li","li","li","ul","body","html"];
+let stack =[];
 
 // Ziel --> "<html><head></head><body><p></p></body></html>"; 
  
  
 // Modul: HTML-String erzeugen | Test
-// ausgabe(getHTML());
+ausgabe(getHTML());
+
 function getHTML(){
 	
     let htmlStr = "";
 
     for (let i = 0; i < tags.length; i++) {
         
-        if (isOpenTag()) {
+        if (isOpenTag(tags[i])) {
             htmlStr += getTag(tags[i], "open");
         } else {
             htmlStr += getTag(tags[i], "close");
@@ -34,27 +36,51 @@ function getHTML(){
     return htmlStr;
 }
 
-function isOpenTag(params) {
-    return !true;
+// ausgabe(isOpenTag("html"));
+// ausgabe(isOpenTag("test"));
+// ausgabe(isOpenTag("bla"));
+// ausgabe(isOpenTag("bla"));
+// ausgabe(isOpenTag("test"));
+function isOpenTag(tag) {
+
+    const cond = (!stack.includes(tag));
+    // const cond = (stack.indexOf(tag) == -1);
+    // stack.includes
+    if (cond) {
+        stack.push(tag);
+        ausgabe(stack);
+        return true;
+        
+    } else {
+        stack.pop(tag);
+        ausgabe(stack);
+        return false;
+    }
+    
 }
 
 // ausgabe(getTag("p","open"));
 // ausgabe(getTag("p","close"));
-function getTag(paramTag, flag) {
+function getTag(param, flag) {
 
     switch (flag) {
         case "open":
-            return controls[0] + paramTag + controls[2];
+            return getTab(stack.length-1) + controls[0] + param + controls[2] + "\n";
         case "close":
-            return controls[1] + paramTag + controls[2];
+            return getTab(stack.length) + controls[1] + param + controls[2] + "\n";
         default:
             return "#!?";
     }
-   
+}
 
-   
-    
-    
+function getTab(tabCount) {
+
+    let myTab ="";
+    for (let index = 0; index < tabCount; index++) {
+
+        myTab += "\t";
+    }
+    return myTab;
 }
 
 // Modul: Ausgabe | Test
