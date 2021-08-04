@@ -17,7 +17,7 @@ let stack = [];
  
  
 // Modul: HTML-String erzeugen | Test
-// ausgabe(getHTML());
+ausgabe(getHTML());
 function getHTML(){
 	
     let htmlStr = "";
@@ -37,16 +37,17 @@ function getHTML(){
 }
 
 // Modul: open || close ?
-ausgabe(isOpenTag("html"));
-ausgabe(isOpenTag("head"));
-ausgabe(isOpenTag("head"));
-ausgabe(isOpenTag("body"));
+// ausgabe(isOpenTag("html"));
+// ausgabe(isOpenTag("head"));
+// ausgabe(isOpenTag("head"));
+// ausgabe(isOpenTag("body"));
 function isOpenTag(tag) {
 
     // wenn tag noch nicht im stack -> push() / true
     // wenn tag schon im stack -> pop() / false
 
     const cond = (stack.indexOf(tag) == - 1); // tag ist neu!
+    //const cond = (tag != stack[stack.length -1]); // tag liegt oben!
 
     if (cond) {
         stack.push(tag);
@@ -59,7 +60,6 @@ function isOpenTag(tag) {
     }
  
 }
-
 
 // Modul: Zusammenbau: <tagStr> --> Tests:
 // ausgabe(getTag("p","open"));
