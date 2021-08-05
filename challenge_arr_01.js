@@ -68,12 +68,25 @@ function isOpenTag(tag) {
 function getTag(tag,flag) {
     switch (flag) {
         case "open":
-            return controls[0] + tag + controls[2];
+            // return controls[0] + tag + controls[2] + "\n";
+            return getTab(stack.length - 1) + controls[0] + tag + controls[2] + "\n";
         case "close":
-            return controls[1] + tag + controls[2];
+            // return controls[1] + tag + controls[2] + "\n";
+            return getTab(stack.length) + controls[1] + tag + controls[2] + "\n";
         default:
             return "#!?";
     }
+}
+
+
+function getTab(tabCount) {
+
+    let myTab ="";
+    for (let index = 0; index < tabCount; index++) {
+
+        myTab += "\t";
+    }
+    return myTab;
 }
 
 // Modul: Ausgabe | Test
