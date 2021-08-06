@@ -8,7 +8,8 @@ einer HTML-Seite ausgibt:
 Verwenden Sie dafür die untenstehenden Arrays
 */
 
-const controls = ["<", "</", ">"];
+// const controls = ["<", "</", ">"];
+const controls = {open_o:"<",open_c:"</",close: ">"};
 const tags = ["html","head","head","body","h1","h1","p","p","p","p","ul","li","li","li","li","ul","body","html"];
 let stack = [];
 
@@ -17,7 +18,7 @@ let stack = [];
  
  
 // Modul: HTML-String erzeugen | Test
-ausgabe(getHTML());
+// ausgabe(getHTML());
 function getHTML(){
 	
     let htmlStr = "";
@@ -62,17 +63,17 @@ function isOpenTag(tag) {
 }
 
 // Modul: Zusammenbau: <tagStr> --> Tests:
-// ausgabe(getTag("p","open"));
-// ausgabe(getTag("p","close"));
-// ausgabe(getTag("p","irgendwas"));
+ausgabe(getTag("p","open"));
+ausgabe(getTag("p","close"));
+ausgabe(getTag("p","irgendwas"));
 function getTag(tag,flag) {
     switch (flag) {
         case "open":
             // return controls[0] + tag + controls[2] + "\n";
-            return getTab(stack.length - 1) + controls[0] + tag + controls[2] + "\n";
+            return getTab(stack.length - 1) + controls.open_o + tag + controls.close + "\n";
         case "close":
             // return controls[1] + tag + controls[2] + "\n";
-            return getTab(stack.length) + controls[1] + tag + controls[2] + "\n";
+            return getTab(stack.length) + controls.open_c + tag + controls.close + "\n";
         default:
             return "#!?";
     }
