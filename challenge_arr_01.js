@@ -46,8 +46,8 @@ function isOpenTag(tag) {
     // wenn tag noch nicht im stack -> push() / true
     // wenn tag schon im stack -> pop() / false
 
-    const cond = (stack.indexOf(tag) == - 1); // tag ist neu!
-    //const cond = (tag != stack[stack.length -1]); // tag liegt oben!
+    // const cond = (stack.indexOf(tag) == - 1); // tag ist neu!
+    const cond = (tag != stack[stack.length -1]); // tag liegt oben!
 
     if (cond) {
         stack.push(tag);
